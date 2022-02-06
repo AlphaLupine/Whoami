@@ -16,7 +16,7 @@ const MyCard = () => {
     return(
         <Box bg={cardColour[colorMode]} w="100%" p={4} display="flex" borderRadius="md" dropShadow=".5rem">
             <Box boxSize="15vh">
-                <Image src="https://imgur.com/o8Qd59z.jpg" borderRadius="full" borderStyle="solid" borderWidth="5px" borderColor={borderColour[colorMode]}/>
+                <Image alt="A picture of me" src="https://imgur.com/o8Qd59z.jpg" borderRadius="full" borderStyle="solid" borderWidth="5px" borderColor={borderColour[colorMode]}/>
             </Box>
             <Box maxWidth="300px" px={4} py={4}>
                 <Text fontWeight="bold">Matthew Duff,</Text>
