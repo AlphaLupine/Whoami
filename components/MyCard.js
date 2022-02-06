@@ -4,22 +4,22 @@ import { SunIcon, MoonIcon } from "@chakra-ui/icons"
 const MyCard = () => {
     const { colorMode } = useColorMode()
     const cardColour = {
-        light: 'gray.400',
-        dark: 'gray.700'
+        light: "gray.400",
+        dark: "gray.700"
     }
 
     const borderColour = {
-        light: '#171717',
-        dark: 'white'
+        light: "#171717",
+        dark: "white"
     }
 
     return(
-        <Box bg={cardColour[colorMode]} w='100%' p={4} display='flex' borderRadius='md' dropShadow='.5rem'>
-            <Box boxSize='15vh'>
-                <Image src="https://imgur.com/o8Qd59z.jpg" borderRadius='full' borderStyle='solid' borderWidth='5px' borderColor={borderColour[colorMode]}/>
+        <Box bg={cardColour[colorMode]} w="100%" p={4} display="flex" borderRadius="md" dropShadow=".5rem">
+            <Box boxSize="15vh">
+                <Image src="https://imgur.com/o8Qd59z.jpg" borderRadius="full" borderStyle="solid" borderWidth="5px" borderColor={borderColour[colorMode]}/>
             </Box>
-            <Box maxWidth='300px' px={4} py={4}>
-                <Text fontWeight='bold'>Matthew Duff,</Text>
+            <Box maxWidth="300px" px={4} py={4}>
+                <Text fontWeight="bold">Matthew Duff,</Text>
                 <Text>Age: 19</Text>
                 <Text>From: Northern Ireland</Text>
                 <Text>Uses: JavaScript/TypeScript</Text>
