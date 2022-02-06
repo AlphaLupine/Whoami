@@ -63,7 +63,7 @@ export default function Index() {
         alignItems="flex-start"
         maxWidth="700px"
       >
-      <Text align="center" color={secondaryColor[colorMode]}>This is the web presence of myself (Matthew), an individual based in Northern Ireland with a burning passion to learn any and all things related to tech. A passion that I very much intend to keep a 🔥blaze🔥 - that's all for now - one last question though... Who are you?</Text> // eslint-disable-line react/no-unescaped-entities
+      <Text align="center" color={secondaryColor[colorMode]}>This is the web presence of myself (Matthew), an individual based in Northern Ireland with a burning passion to learn any and all things related to tech. A passion that I very much intend to keep a 🔥blaze🔥 - that is all for now - one last question though... Who are you?</Text>
       </Flex>
       </Stack>
 
