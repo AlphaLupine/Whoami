@@ -1,4 +1,4 @@
-import { useColorMode, IconButton } from "@chakra-ui/react"
+import { useColorMode, IconButton, Tooltip } from "@chakra-ui/react"
 import { SunIcon, MoonIcon } from "@chakra-ui/icons"
 
 const ThemeModeSwitch = () => {
@@ -8,12 +8,14 @@ const ThemeModeSwitch = () => {
         dark: "white"
     }
     return(
-        <IconButton
-            aria-label="Toggle Dark Mode"
-            icon={colorMode === "dark" ? <SunIcon/> : <MoonIcon/>}
-            onClick={toggleColorMode}
-            color={iconColour[colorMode]}
-        />
+        <Tooltip label={colorMode === "dark" ? "Lights On?" : "Lights Off?"}>
+            <IconButton
+                aria-label={colorMode === "dark" ? "Toggle Light Mode" : "Toggle Dark Mode"}
+                icon={colorMode === "dark" ? <SunIcon/> : <MoonIcon/>}
+                onClick={toggleColorMode}
+                color={iconColour[colorMode]}
+            />
+        </Tooltip>
     )
 }
 
