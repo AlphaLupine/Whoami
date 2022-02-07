@@ -11,6 +11,7 @@ import {
 import NextLink from "next/link"
 import styled from "@emotion/styled"
 import ThemeModeSwitch from "./ThemeModeSwitch"
+import RandomHueButton from "./RandomHueButton"
 
 const Container = ({ children }) => {
     const { colorMode } = useColorMode()
@@ -68,7 +69,11 @@ const Container = ({ children }) => {
                         <Button as="a" variant="ghost" p={[1,2,4]} _hover={{backgroundColor: navHoverBg[colorMode], textColor: navHoverTextBg[colorMode]}}>Whoami</Button>
                     </NextLink>
                 </Box>
-                <ThemeModeSwitch />
+                    
+                <Box>
+                    <ThemeModeSwitch />
+                </Box>
+
             </StickyNav>
             <Flex
                 as="main"
@@ -95,7 +100,8 @@ const Container = ({ children }) => {
                 alignItems="flex-start"
                 maxWidth="700px"
             >
-                <Divider variant="dashed"></Divider>
+                <RandomHueButton/>
+                <Divider py={2} variant="dashed"></Divider>
                 <Text py={2} color={color[colorMode]}>Made with ❤️ by Matthew aka Lupine</Text>
             </Flex>
             </Stack>

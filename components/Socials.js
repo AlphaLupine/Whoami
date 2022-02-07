@@ -14,9 +14,9 @@ const Socials = () => {
     }
 
     const iconHoverBg = {
-        light: "gray.600",
-        dark: "gray.300"
-    }
+        light: "gray.700",
+        dark: "gray.500"
+      }
 
     return(
         <>
