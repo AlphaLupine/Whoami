@@ -24,7 +24,7 @@ const Socials = () => {
                 <a target="_blank" href="https://github.com/AlphaLupine" rel="noopener noreferrer">
                 <Icon as={FaGithub} boxSize="7vh" _hover={{textColor: iconHoverBg[colorMode]}}/>
                 </a>
-                <a target="_blank" href="https://twitter.com/ARTIS_Lupine" rel="noopener noreferrer">
+                <a target="_blank" href="https://twitter.com/IamLupine" rel="noopener noreferrer">
                 <Icon as={FaTwitter} boxSize="7vh" _hover={{textColor: iconHoverBg[colorMode]}}/>
                 </a>
                 <a target="_blank" href="https://open.spotify.com/user/pjgvost9miptlyb4ki01h7ss5?si=b8aa0c4cd9304d2b" rel="noopener noreferrer">
