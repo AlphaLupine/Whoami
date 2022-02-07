@@ -2,6 +2,7 @@ import Head from "next/head"
 import Container from "../components/Container"
 import { Flex, Heading, Stack, Text, useColorMode } from "@chakra-ui/react"
 import Typewriter from "typewriter-effect"
+import Socials from "../components/Socials"
 
 export default function Index() {
 
@@ -15,7 +16,7 @@ export default function Index() {
     "Hey Stranger!",
     "Hi Person :)",
     "Ahoy Matey!",
-    "Greeting's Fellow",
+    "Greetings Fellow",
     "Salutations Earthling"
   ]
   const {colorMode} = useColorMode()
@@ -71,7 +72,10 @@ export default function Index() {
           alignItems="flex-start"
           maxWidth="700px"
       >
-        <Text color={secondaryColor[colorMode]}>The name is Matthew, nice to meet you!</Text>
+        <Stack direction='column' justifyContent='center' alignItems='center' spacing='4.5rem'>
+          <Text color={secondaryColor[colorMode]}>The name is Matthew, nice to meet you!</Text>
+          <Socials/>
+        </Stack>
       </Flex>
       </Stack>
 
