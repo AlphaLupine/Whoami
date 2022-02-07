@@ -36,14 +36,14 @@ const RandomHueButton = () => {
             variant="outline"
             _hover={{backgroundColor: buttonHoverBg[colorMode], textColor: buttonHoverTextBg[colorMode]}}
             onClick={() => toast({
-                position: 'bottom-left',
+                position: "bottom-left",
                 render: () => (
                     <Box borderRadius="full" color={toastTextColour[colorMode]} bg={toastColour[colorMode]}>
                         <Text px={2}>This feature has not yet been implemented</Text>
                     </Box>
                 ),
             })}
-        >Change My Phillip's Hue Colour</Button>
+        >Change My Phillips Hue Colour</Button>
     )
 }
 
