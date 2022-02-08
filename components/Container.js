@@ -97,7 +97,6 @@ const Container = ({ children }) => {
                 alignItems="flex-start"
                 m="0 auto 4rem auto"
                 maxWidth="700px"
-                minWidth="480px"
             >
             <Flex
                 flexDirection="column"
