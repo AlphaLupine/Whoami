@@ -52,6 +52,7 @@ const Container = ({ children }) => {
                 alignItems="center"
                 maxWidth="800px"
                 minWidth="480px"
+                
                 width="100%"
                 bg={bgColor[colorMode]}
                 as="nav"
@@ -87,6 +88,7 @@ const Container = ({ children }) => {
                 px={[0,4,4]}
                 mt={[4,8,8]}
                 minWidth="480px"
+                minHeight="100vh"
             >
                 {children}
                 
