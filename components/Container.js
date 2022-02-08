@@ -86,6 +86,7 @@ const Container = ({ children }) => {
                 color={color[colorMode]}
                 px={[0,4,4]}
                 mt={[4,8,8]}
+                minWidth="460px"
             >
                 {children}
                 
