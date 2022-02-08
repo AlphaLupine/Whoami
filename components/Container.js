@@ -88,7 +88,7 @@ const Container = ({ children }) => {
                 px={[0,4,4]}
                 mt={[4,8,8]}
                 minWidth="480px"
-                minHeight="100vh"
+                minHeight={["100vh", 0]}
             >
                 {children}
                 
