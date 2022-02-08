@@ -51,7 +51,7 @@ const Container = ({ children }) => {
                 justifyContent="space-between"
                 alignItems="center"
                 maxWidth="800px"
-                minWidth="356px"
+                minWidth="480px"
                 width="100%"
                 bg={bgColor[colorMode]}
                 as="nav"
@@ -86,7 +86,7 @@ const Container = ({ children }) => {
                 color={color[colorMode]}
                 px={[0,4,4]}
                 mt={[4,8,8]}
-                minWidth="460px"
+                minWidth="480px"
             >
                 {children}
                 
@@ -97,6 +97,7 @@ const Container = ({ children }) => {
                 alignItems="flex-start"
                 m="0 auto 4rem auto"
                 maxWidth="700px"
+                minWidth="480px"
             >
             <Flex
                 flexDirection="column"
