@@ -1,0 +1,186 @@
+---
+title: "Laser Turrets Go Zap"
+publishedAt: "2022-02-08"
+summary: "A blog post that I intend to keep as short possible, explains how I recreated Michael Reeve's laser turret. Sadly though, the facial recogition is still a work in progress"
+---
+
+# Creating A Laser Turret,
+
+In this blog I will try to cover my step by step process on creating Michael Reeve's laser Turret
+
+## **Resources:**
+- x2 DC Servo Motor
+- x1 Breadboard
+- x1 5v Power Supply
+- x1 Arduino Uno
+- x1 5v Laser Diode
+- x1 Soldering Iron
+- x1 Glue Gun
+- x1 Empty Pen Shell
+- x1 Pack Of *Pinned* Jumper Cables
+- x1 Housing For Components (I used a deodorant box)
+
+## **Languages Used**
+- C# (.NET framework)
+- C
+
+## **Software Used**
+- Arduino Studio
+- Visual Studio
+
+## **Where did I start?**
+To begin this project I first decided to assemble the hardware before writing the software as this would give me a better idea of how the software should be written as I would need
+to account for bounds of the hardware or any other limitations to the hardware that might be encountered during assembly. To build the turret, I simply glued them together with hotglue
+making sure atleast one of them was tilted in a different orientation to the other, I needed a turret to handle X co-ordinates and one to handle Y co-ordinates, they were then stuck 
+to a base, in my case I used the lid of a deodorant box. I then used some jumper cables to connect the signal inputs of the motor's to the signal outputs of the Arduino.
+
+## **Assembly**
+Assembly of this project was rather simple thanks to the use of a breadboard which allowed me to use pinned jumper cables to wire everything up. One thing however that had to be done
+was cutting the end off of my 5v power supply and soldering my own jumper cables onto it in order to make it breadboard compatible. Once that small amout of prep work was completed, I
+was able to wire everything up according to the image below:
+![Image Showing Assembly](/images/blog/laserturret/image1.jpg)
+
+## **Software**
+Now we get to the fun part! Writing the software. As mentioned above, this project uses C# and C. To begin, I had to understand how data was going to flow. The plan was to have my mouse
+control the X and Y co-ordinates therefore information had to flow from my PC to my Arduino, and then from the Ardiuno to the Servo's. This means that the Arduino would be receiving data
+so I had to write something for it to understand and interpret the data coming from my PC.
+
+*Base Arduino Template:*
+```C
+void setup() {
+  // put your setup code here, to run once:
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+  
+}
+```
+First we need to attach the pins used by my Servo's so that we can send the data from the Arduino to each servo, this can be done in the **setup()** method. The setup method gets executed only
+once when the Arduino receives power.
+```C
+#include<Servo.h> //Import Servo Library
+
+Servo serX; // Declare a variable for the Servo handling X co-ordinates
+Servo serY; // Declare a variable for the Servo handling Y co-ordinates
+
+String serialData; // Declare a varible to store incoming serial data
+
+void setup() {
+  // put your setup code here, to run once:
+
+  //Attach servo's to respective pins
+  serX.attach(11);
+  serY.attach(10);
+
+  //Begin serial communication with a bodrate of 9600
+  Serial.begin(9600);
+  Serial.setTimeout(10);
+  
+}
+```
+Once we have the intial setup, we can then listen for incoming data. Luckily for us, there is an event for this! If we define a method called *serialEvent()*, any code within that method
+will execute when there is incoming serial data, which is perfect! However, before we use this event, we need a way to parse the data coming in, so that the Arduino can interpret the
+co-ordinates correctly before sending it to the servo's. The reason why we need to parse the data in the first place is because of how the C# program that I'll discuss a little later sends
+the data. It sends data as a string in the following format: **'X{data}Y{data}'**.
+```C
+int parseX(String data) {
+  //clean up data string for X co-ordinates
+  data.remove(data.indexOf("Y"));
+  data.remove(data.indexOf("X"), 1);
+  return data.toInt();
+}
+
+int parseY(String data) {
+  //clean up data string for Y co-ordinates
+  data.remove(0, data.indexOf("Y") + 1);
+  return data.toInt();
+}
+```
+Now that we have two methods to tidy up the co-ordinates, we can finally use the event!
+```C
+void serialEvent() {
+  serialData = Serial.readString(); //Read the data
+
+  serX.write(parseX(serialData)); //Use method to write clean X co-ordinate to the X Servo
+  serY.write(parseY(serialData)); //Use method to write clean Y co-ordinate to the Y Servo
+}
+```
+All together, the Arduino code looks like this
+```C
+#include<Servo.h>
+
+Servo serX;
+Servo serY;
+
+String serialData;
+
+void setup() {
+  // put your setup code here, to run once:
+  serX.attach(11);
+  serY.attach(10);
+
+  Serial.begin(9600);
+  Serial.setTimeout(10);
+  
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+  
+}
+
+void serialEvent() {
+  serialData = Serial.readString();
+
+  serX.write(parseX(serialData));
+  serY.write(parseY(serialData));
+}
+
+int parseX(String data) {
+  data.remove(data.indexOf("Y"));
+  data.remove(data.indexOf("X"), 1);
+  return data.toInt();
+}
+
+int parseY(String data) {
+  data.remove(0, data.indexOf("Y") + 1);
+  return data.toInt();
+}
+```
+Now for the other half of the software, a windows form application written in C# on the .NET framework.
+![Image Showing Windows Form](/images/blog/laserturret/image2.png)
+
+As you can see, the form itself is very basic. It has an input box to declare which COM port you intend to use as well as button to toggle between open and closed states of the serial port.
+To control the turret, the user would need to move their mouse anywhere within the form and then the turret would move accordingly. To begin, we need to open the serial port once the form is loaded.
+```C
+private void Form1_Load(object sender, EventArgs e)
+        {
+            watch = Stopwatch.StartNew(); //Timer used to prevent flooding the serial port
+            serialPort.Open();
+        }
+```
+Once opened, we can use an event to detect any mouse movements on the form:
+```C
+private void Form1_MouseMove(object sender, MouseEventArgs e)
+        {
+            writeToPort(new Point(e.X, e.Y)); // Call method to write data to the port
+        }
+```
+As you can see, this event calls a method called **writeToPort()**. This method contains some calculations to create co-ordinates based off of the position of the mouse. One thing that needs to be considered
+is that the servo motor's are limited to 90 degrees of rotation in each direction, for a total limit of 180 degrees in rotation. We need to take this into considertion as we do not want to send a pair of
+co-ordinates that the servo's cannot perform. To fix this, the **writeToPort()** method scales the mouse co-ordinates to fit within the limitations of the motor's. The caluclation performed is:
+
+`mouseCoordinate / (sizeOfForm / boundsOfRotation)`
+
+This can now be seen in the **writeToPort()** method:
+```C
+public void writeToPort(Point coords) {
+            if (watch.ElapsedMilliseconds < 15) return; //Using the timer from earlier to determine if data should be sent
+            watch = Stopwatch.StartNew();
+            serialPort.Write(String.Format("X{0}Y{1}",
+                (coords.X / (Size.Width / 180)),
+                (coords.Y / (Size.Height / 180))));
+        }
+```
+You can watch a video of the finished project **[here!](https://youtu.be/2K0iGnQ3OqY)**

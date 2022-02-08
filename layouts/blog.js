@@ -24,7 +24,7 @@ export default function BlogLayout({ children, frontMatter }) {
     return (
         <Container>
             <Head>
-                <title>${slug} - Blog - Benjamin Carlson</title>
+                <title>whoami{slug} - Blog - Matthew Duff</title>
             </Head>
             <Stack
                 as="article"
