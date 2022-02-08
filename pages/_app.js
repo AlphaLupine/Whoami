@@ -27,7 +27,7 @@ const GlobalStyle = ({children}) => {
           #__next {
             display: flex;
             flex-direction: column;
-            min-height: 150vh;
+            min-height: 105vh;
             background: ${colorMode === 'light' ? 'white' : '#171717'};
           }
           `
