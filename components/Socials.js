@@ -1,5 +1,5 @@
 import { useColorMode, IconButton, Box, Image, Text, Icon, Stack } from "@chakra-ui/react"
-import { FaGithub, FaTwitter, FaSpotify } from "react-icons/fa"
+import { FaGithub, FaTwitter, FaSpotify, FaTwitch } from "react-icons/fa"
 
 const Socials = () => {
     const { colorMode } = useColorMode()
@@ -29,6 +29,9 @@ const Socials = () => {
                 </a>
                 <a target="_blank" href="https://open.spotify.com/user/pjgvost9miptlyb4ki01h7ss5?si=b8aa0c4cd9304d2b" rel="noopener noreferrer">
                 <Icon as={FaSpotify} boxSize="7vh" _hover={{textColor: iconHoverBg[colorMode]}}/>
+                </a>
+                <a target="_blank" href="https://www.twitch.tv/thealphalupine" rel="noopener noreferrer">
+                <Icon as={FaTwitch} boxSize="7vh" _hover={{textColor: iconHoverBg[colorMode]}}/>
                 </a>
             </Stack>
         </> 
